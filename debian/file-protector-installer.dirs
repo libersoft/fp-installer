@@ -1,0 +1,11 @@
+/usr/bin
+/usr/lib/file-protector
+/usr/lib/pkcs11
+/usr/share/file-protector
+/usr/share/doc/file-protector
+/usr/share/applications
+/usr/share/icons/hicolor/32x32/apps
+/usr/share/icons/hicolor/48x48/apps
+/usr/share/icons/hicolor/64x64/apps
+/usr/share/icons/hicolor/128x128/apps
+/var/cache/file-protector-installer

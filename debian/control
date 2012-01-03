@@ -1,0 +1,18 @@
+Source: file-protector
+Section: contrib/utils
+Priority: optional
+Maintainer: Daniele Napolitano <dn@libersoft.it>
+Build-Depends: debhelper (>= 8)
+Standards-Version: 3.9.2
+Homepage: http://www.card.infocamere.it/
+
+Package: file-protector-installer
+Architecture: i386
+Depends: ${misc:Depends}, libc6 (>= 2.7), wget, unzip, openjdk-6-jre | sun-java6-jre | openjdk-7, pcscd, libpcsclite1
+Description: smart card signer
+ Downloads and installs File Protector from www.card.infocamere.it.
+ .
+ File Protector can sign various documents with a smart card.
+ .
+ This package also install the Athena PKCS11 library.
+

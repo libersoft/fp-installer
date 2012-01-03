@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=File Protector
+GenericName=Smart card file signer
+Comment=Smart card file signer
+Exec=file-protector
+Icon=file-protector
+StartupNotify=false
+Terminal=false
+Type=Application
+Categories=Utility;Security;Java;

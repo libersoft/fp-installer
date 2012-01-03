@@ -1,0 +1,113 @@
+#!/bin/sh
+
+set -e
+
+FP_VERSION=5.1.8.3
+FILENAME=FileProtector-${FP_VERSION}-Linux.zip
+SHA256SUM_TGZ="506b03ec385cbcd7fa12fd64498e094298b135fac063b5e65569e1f5b3cdbff9"
+#PARTNER_URL="http://www.card.infocamere.it/infocamere/FileDocManager/download?file=/$FILENAME"
+
+# FIXME: temporaneo
+PARTNER_URL=http://dl.dropbox.com/u/1136039/FileProtector-5.1.8.3-Linux.zip
+
+. /usr/share/debconf/confmodule
+
+fp_exit_with_error() {
+	echo $1
+	echo "File Protector is NOT installed."
+	db_fset file-protector-installer/local seen false
+	db_fset file-protector-installer/httpget seen false
+	db_set file-protector-installer/httpget false
+	exit 1
+}
+
+fp_download_and_unpack() {
+
+	cd /var/cache/file-protector-installer
+	
+	db_get file-protector-installer/local
+	
+	if [ -d "$RET" -a -f "$RET"/$FILENAME ]; then
+
+		echo "Installing from local file $RET/$FILENAME"
+		cp -f -p "$RET"/$FILENAME ${FILENAME}_TEMP
+		mv -f ${FILENAME}_TEMP $FILENAME
+	
+	else # no local file
+	
+	        db_get file-protector-installer/httpget
+	        if [ "$RET" != "true" ]; then
+		        fp_exit_with_error "download or license refused"
+	        fi
+
+	        # use apt proxy
+	        APT_PROXIES=$(apt-config shell \
+	        http_proxy Acquire::http::Proxy \
+	        https_proxy Acquire::https::Proxy \
+	        ftp_proxy Acquire::ftp::Proxy \
+	        )
+
+	        if [ -n "$APT_PROXIES" ]; then
+		        eval export $APT_PROXIES
+	        fi
+
+	        # setting wget options
+	        :> wgetrc
+	        echo "noclobber = off" >> wgetrc
+	        echo "dir_prefix = ." >> wgetrc
+	        echo "dirstruct = off" >> wgetrc
+	        echo "verbose = on" >> wgetrc
+	        echo "progress = dot:default" >> wgetrc
+	        echo "tries = 2" >> wgetrc
+
+	        # downloading the plugin
+	        echo "Downloading..."
+	        rm -f $FILENAME
+	        WGETRC=wgetrc wget $PARTNER_URL -O $FILENAME \
+		        || fp_exit_with_error "download failed"
+	        rm -f wgetrc
+	        echo "Download done."
+	        
+	fi # end if local file
+
+	# verify SHA256 checksum of (copied or downloaded) tarball
+	rm -rf FileProtector*/
+        echo "$SHA256SUM_TGZ  $FILENAME" | sha256sum -c > /dev/null 2>&1 \
+		|| fp_exit_with_error "sha256sum mismatch $FILENAME"
+
+	# unpacking and checking the plugin
+	unzip $FILENAME > /dev/null 2>&1 || fp_exit_with_error "cannot unpack plugin"
+}
+
+fp_download_and_unpack
+
+install -m 644 FileProtector*/FP*/*.so /usr/lib/file-protector/
+install -m 644 FileProtector*/FP*/lib/*.jar /usr/share/file-protector/
+install -m 644 FileProtector*/FP*/lib/images.zip /usr/share/file-protector/
+install -m 644 FileProtector*/FP*/doc/* /usr/share/doc/file-protector/
+
+echo "File Protector installed."
+
+if uname -p | grep x86_64 > /dev/null 2>&1 ; then
+        BITS=64
+else
+        BITS=32
+fi
+
+install -m 644 FileProtector*/P11_Athena/Linux${BITS}_IDPC_v5.21/libASEP11.so /usr/lib/
+ln -s /usr/lib/libASEP11.so /usr/lib/pkcs11/libASEP11.so
+install -m 644 FileProtector*/P11_Athena/Linux${BITS}_IDPC_v5.21/aseCnsATRConfig /etc/
+
+echo "Athena PKCS11 library installed."
+
+rm -rf FileProtector*
+
+db_fset file-protector-installer/local seen false
+db_fset file-protector-installer/httpget seen false
+db_set file-protector-installer/httpget false
+
+#DEBHELPER#
+
+exit 0
+
+# vim: ts=2 sw=2

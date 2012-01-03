@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+rm -rf /usr/lib/file-protector/*
+rm -rf /usr/share/file-protector/*
+rm -rf /usr/share/doc/file-protector/*
+rm -rf /var/cache/file-protector-installer/*
+rm -f /usr/lib/file-protector/libASEP11.so
+rm -f /usr/lib/pkcs11/libASEP11.so
+rm -f /etc/aseCnsATRConfig 
+
+#DEBHELPER#
+
+exit 0
+
+# vim: ts=2 sw=2
