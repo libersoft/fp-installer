@@ -1,0 +1,6 @@
+debian/file-protector-installer.debhelper.log
+debian/file-protector-installer.postinst.debhelper
+debian/file-protector-installer.postrm.debhelper
+debian/file-protector-installer.substvars
+debian/file-protector-installer/
+debian/files
