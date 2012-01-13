@@ -8,7 +8,7 @@
 override_dh_auto_install:
 	dh_auto_install
 	install -m 755 $(CURDIR)/debian/file-protector.sh $(CURDIR)/debian/file-protector-installer/usr/bin/file-protector
-	install -m 644 $(CURDIR)/debian/file-protector.desktop $(CURDIR)/debian/file-protector-installer/usr/share/applications/file-protector.desktop
+	install -m 644 $(CURDIR)/debian/file-protector-installer.desktop $(CURDIR)/debian/file-protector-installer/usr/share/applications/file-protector-installer.desktop
 	
 	install -m 644 $(CURDIR)/debian/icons/file-protector32.png $(CURDIR)/debian/file-protector-installer/usr/share/icons/hicolor/32x32/apps/file-protector.png
 	install -m 644 $(CURDIR)/debian/icons/file-protector48.png $(CURDIR)/debian/file-protector-installer/usr/share/icons/hicolor/48x48/apps/file-protector.png
