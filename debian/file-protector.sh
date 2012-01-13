@@ -38,7 +38,11 @@ if [ "$JAVACMD" ]; then
     export DS_CREATION_POLICY=2
     export DS_NAME_PREFIX=Firma
     
-    exec $JAVACMD $JAVA_OPTS -Djava.ext.dirs=/usr/share/file-protector it.actalis.ellips.fp.FileProtector "$@"
+    if [ $# -gt 0 ]; then
+        ARGS="-v"
+    fi
+    
+    exec $JAVACMD $JAVA_OPTS -Djava.ext.dirs=/usr/share/file-protector it.actalis.ellips.fp.FileProtector $ARGS "$@"
 else
     echo "No valid JVM found to run File Protector."
     exit 1
