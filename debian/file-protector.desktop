@@ -3,6 +3,7 @@ Version=1.0
 Name=File Protector
 GenericName=Smart card file signer
 Comment=Smart card file signer
+Comment[it]=Per gestire la firma digitale con smart card dei documenti
 Exec=file-protector %f
 Icon=file-protector
 StartupNotify=false
