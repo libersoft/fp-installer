@@ -1,3 +1,13 @@
+file-protector (5.1.8.3-2) unstable; urgency=low
+
+  * application/pkcs7-mime handling by .desktop file, now Nautilus and all XDG
+    compliant applications open p7m with File Protector
+  * italian translation in the .desktop commenct section
+  * renamed the .desktop file so as to detect File Protector as a desktop
+    application from Ubuntu Software Center.
+
+ -- Daniele Napolitano <dn@libersoft.it>  Fri,  13 Jan 2012 16:55:18 +0100
+
 file-protector (5.1.8.3-1) unstable; urgency=low
 
   * Initial Release.
