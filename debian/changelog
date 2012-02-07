@@ -1,3 +1,11 @@
+file-protector (5.1.8.3-3) unstable; urgency=low
+
+  * Launcher more simplified
+  * Fixed dependency of OpenJDK 7
+  * Fixed download from card.infocamere
+
+ -- Daniele Napolitano <dn@libersoft.it>  Tue, 07 Feb 2012 18:55:25 +0100
+
 file-protector (5.1.8.3-2) unstable; urgency=low
 
   * application/pkcs7-mime handling by .desktop file, now Nautilus and all XDG
