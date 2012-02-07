@@ -5,10 +5,7 @@ set -e
 FP_VERSION=5.1.8.3
 FILENAME=FileProtector-${FP_VERSION}-Linux.zip
 SHA256SUM_TGZ="506b03ec385cbcd7fa12fd64498e094298b135fac063b5e65569e1f5b3cdbff9"
-#PARTNER_URL="http://www.card.infocamere.it/infocamere/FileDocManager/download?file=/$FILENAME"
-
-# FIXME: temporaneo
-PARTNER_URL=http://dl.dropbox.com/u/1136039/FileProtector-5.1.8.3-Linux.zip
+PARTNER_URL="http://www.card.infocamere.it/infocamere/FileDocManager/download?file=/$FILENAME"
 
 . /usr/share/debconf/confmodule
 
