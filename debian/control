@@ -8,7 +8,7 @@ Homepage: http://www.card.infocamere.it/
 
 Package: file-protector-installer
 Architecture: i386
-Depends: ${misc:Depends}, libc6 (>= 2.7), wget, unzip, openjdk-6-jre | sun-java6-jre | openjdk-7, pcscd, libpcsclite1
+Depends: ${misc:Depends}, libc6 (>= 2.7), wget, unzip, openjdk-6-jre | sun-java6-jre | openjdk-7-jre, pcscd
 Description: smart card signer
  Downloads and installs File Protector from www.card.infocamere.it.
  .
